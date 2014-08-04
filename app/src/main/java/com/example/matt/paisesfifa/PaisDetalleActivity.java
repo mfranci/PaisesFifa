@@ -29,7 +29,7 @@ public class PaisDetalleActivity extends Activity {
 
       if (intent != null) {
          Pais pais = new Pais(
-               intent.getStringExtra("KeyExtraPaisId"),
+               intent.getIntExtra("KeyExtraPaisId", 0),
                intent.getStringExtra("KeyExtraPaisNombre"),
                intent.getIntExtra("KeyExtraPaisImagen", 0),
                intent.getStringExtra("KeyExtraPaisDescripcion")
@@ -40,7 +40,7 @@ public class PaisDetalleActivity extends Activity {
          imgPais.setImageResource(pais.getImagen());
 
          //cargo el pais_id
-         pais_id = pais.getId();
+         pais_id = Integer.toString(pais.getId());
       }
    }
 

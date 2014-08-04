@@ -4,12 +4,12 @@ package com.example.matt.paisesfifa.models;
  * Created by matt on 28/07/2014.
  */
 public class Pais {
-   private String id = null;
-   private String nombre = null;
-   private int imagen = 0;
-   private String descripcion = null;
+   private int id;
+   private String nombre;
+   private int imagen;
+   private String descripcion;
 
-   public Pais(String id, String nombre, int imagen, String descripcion) {
+   public Pais(int id, String nombre, int imagen, String descripcion) {
       this.id = id;
       this.nombre = nombre;
       this.imagen = imagen;
@@ -20,11 +20,11 @@ public class Pais {
       return nombre;
    }
 
-   public String getId() {
+   public int getId() {
       return id;
    }
 
-   public void setId(String id) {
+   public void setId(int id) {
       this.id = id;
    }
 
