@@ -26,19 +26,18 @@ public class DatabaseHandler extends SQLiteOpenHelper {
    public static final String KEY_DESCRIPCION = "descripcion";
 
    public DatabaseHandler(Context context) {
-      super(context, "paises.db", null, 1);
-      //super(context, DATABASE_NAME, null, DATABASE_VERSION);
+      super(context, DATABASE_NAME, null, DATABASE_VERSION);
    }
 
    @Override
    public void onCreate(SQLiteDatabase db) {
-      String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_PAISES + "("
+      String strSQL = "CREATE TABLE " + TABLE_PAISES + "("
             + KEY_ID + " INTEGER PRIMARY KEY,"
             + KEY_NOMBRE + " TEXT,"
             + KEY_IMAGEN + " INTEGER,"
             + KEY_DESCRIPCION + " TEXT" + ")";
-      db.execSQL(CREATE_CONTACTS_TABLE);
-      Log.d(getClass().toString(),"onCreate-> se creó la tabla "+TABLE_PAISES);
+      db.execSQL(strSQL);
+      Log.d(getClass().toString(), "onCreate-> se creó la tabla " + TABLE_PAISES + ", versión: " + DATABASE_VERSION);
 
       //cargo datos por primera vez
       List<Pais> paisesLst = new ArrayList();
@@ -74,7 +73,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
       paisesLst.add(new Pais(30, "RUSIA", R.drawable.pais_rusia, "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor"));
       paisesLst.add(new Pais(31, "SUIZA", R.drawable.pais_suiza, "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor"));
       paisesLst.add(new Pais(32, "URUGUAY", R.drawable.pais_uruguay, "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor"));
-      Log.d(getClass().toString(),"onCreate-> se cargó lista de paises");
+      Log.d(getClass().toString(), "onCreate-> se cargó lista de paises");
 
       //hago insert
       ContentValues values;
@@ -84,14 +83,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
          values.put(KEY_IMAGEN, pais.getImagen());
          values.put(KEY_DESCRIPCION, pais.getDescripcion());
          db.insert(TABLE_PAISES, null, values); // Contact Name
-         Log.d(getClass().toString(),"onCreate-> insertando en tabla:"+pais.getNombre());
+         Log.d(getClass().toString(), "onCreate-> insertando en tabla:" + pais.getNombre());
       }
+      Log.d(getClass().toString(), "onCreate -> fin de inserts");
       //db.close(); // Closing database connection
    }
 
    @Override
    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-      db.execSQL("DROP TABLE IF EXISTS " + TABLE_PAISES);
+      String strSQL = "DROP TABLE IF EXISTS " + TABLE_PAISES;
+      db.execSQL(strSQL);
+      Log.d(getClass().toString(), "onUpgrade -> drop de tabla " + TABLE_PAISES);
 
       //creamos nuevamente la DB
       onCreate(db);
