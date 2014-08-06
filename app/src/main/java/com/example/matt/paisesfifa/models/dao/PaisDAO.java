@@ -77,7 +77,7 @@ public class PaisDAO {
    }
 
    // Getting All Contacts
-   public List<Pais> getAllContacts() {
+   public List<Pais> getAll() {
       List<Pais> paisesList = new ArrayList<Pais>();
       // Select All Query
       String selectQuery = "SELECT * FROM " + databaseHandler.TABLE_PAISES;
@@ -96,7 +96,7 @@ public class PaisDAO {
       return paisesList;
    }
 
-   public int getContactsCount() {
+   public int getCount() {
       String countQuery = "SELECT * FROM " + databaseHandler.TABLE_PAISES;
       Cursor cursor = db.rawQuery(countQuery, null);
       cursor.close();

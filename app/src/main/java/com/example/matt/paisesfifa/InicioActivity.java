@@ -10,20 +10,26 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.matt.paisesfifa.models.Pais;
-import com.example.matt.paisesfifa.models.PaisData;
+import com.example.matt.paisesfifa.models.dao.PaisDAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class InicioActivity extends ListActivity {
    private final static int REQUEST_CODE = 100;
-   List<Pais> paises = null;
+   List<Pais> paises;
+   PaisDAO paisDAO;
 
    @Override
    protected void onCreate(Bundle savedInstanceState) {
-      paises = new PaisData().getPaises();
-
+      // = new PaisData().getPaises(); //trae datos harcoded.
       super.onCreate(savedInstanceState);
       setContentView(R.layout.activity_inicio);
+      paisDAO = new PaisDAO(this);
+      paisDAO.open();
+
+      paises = new ArrayList<Pais>();
+      paises = paisDAO.getAll();
 
 //      LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
 
