@@ -35,7 +35,7 @@ public class PaisDetalleActivity extends Activity {
                intent.getStringExtra("KeyExtraPaisDescripcion")
          );
          txtPaisNombre.setText(pais.getNombre());
-         txtPaisId.setText(pais.getId());
+         txtPaisId.setText(Integer.toString(pais.getId()));
          txtPaisDescripcion.setText(pais.getDescripcion());
          imgPais.setImageResource(pais.getImagen());
 
